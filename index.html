@@ -9,8 +9,17 @@
     </head>
 
     <body>
-        <canvas id="rain-something" style="background: transparent;"></canvas>
+        <canvas id="rain-something"></canvas>
+        <button id="single-or-mixed">mixed</button>
         <script src="rain.js"></script>
     </body>
+    <style>
+        #rain-something {
+            position: fixed;
+            z-index: -1;
+            background: transparent;
+            overflow: hidden;
+        }
+    </style>
 
 </html>
