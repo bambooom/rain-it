@@ -1,0 +1,24 @@
+# dependencies
+node_modules
+
+
+# testing
+/coverage
+
+# production
+build
+dist
+
+# misc
+.DS_Store
+.env
+.idea
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# vscode
+.vscode
+
+# files to deal with data
+data
