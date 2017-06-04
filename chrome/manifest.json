@@ -1,0 +1,29 @@
+{
+    "manifest_version": 2,
+    "name": "rain-it",
+    "description": "Take a break! Rain it ✨",
+    "version": "0.0.1",
+    "browser_action": {
+        "default_icon": "sparkles.png",
+        // "default_popup": "index.html",
+        "default_title": "Take a break! Rain it ✨"
+    },
+    "background": {
+        "scripts": [
+            "background.js"
+        ],
+        "persistent": false
+    },
+    "permissions": [
+        "activeTab",
+        "storage"
+    ],
+    "content_scripts": [{
+        "matches": [
+            "*://*/*"
+        ],
+        "js": [
+            "rain-it.js"
+        ]
+    }]
+}
