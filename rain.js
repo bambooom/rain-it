@@ -59,7 +59,7 @@ class RainDrop {
         this.y = Math.random() * maxHeight;
         this.vx = mode === MODE.RAIN ? 0 : Math.random() * maxVelocity;
         this.vy = mode === MODE.RAIN ? AG : Math.random() * maxVelocity;
-        this.font = '18px serif';
+        this.font = '14px serif';
         // this.color = '#fff';
     }
 
@@ -135,7 +135,7 @@ function draw() {
 }
 
 // window.requestAnimationFrame(draw);
-setInterval(draw, 50);
+let loopId = setInterval(draw, 50);
 window.addEventListener('resize', () => {
     canvas.height = window.innerHeight;
     canvas.width = window.innerWidth;
@@ -143,18 +143,36 @@ window.addEventListener('resize', () => {
 
 const btn = document.getElementById('single-or-mixed');
 btn.addEventListener('click', () => {
-        if (emojiMode === EMOJI_MODE.SINGLE) {
-            emojiMode = EMOJI_MODE.MIXED;
-            btn.textContent = 'single';
-        } else {
-            emojiMode = EMOJI_MODE.SINGLE;
-            btn.textContent = 'mixed';
-        }
+    if (emojiMode === EMOJI_MODE.SINGLE) {
+        emojiMode = EMOJI_MODE.MIXED;
+        btn.textContent = 'single';
+    } else {
+        emojiMode = EMOJI_MODE.SINGLE;
+        btn.textContent = 'mixed';
+    }
+    emojiDrops = generateEmojiDrops(emojiMode);
+});
+
+document.getElementById('refresh').addEventListener('click', () => {
+    emojiDrops = generateEmojiDrops(emojiMode);
+});
+
+const stopBtn = document.getElementById('stop-or-start');
+stopBtn.addEventListener('click', () => {
+    if (loopId) {
+        clearInterval(loopId);
+        loopId = null;
+        stopBtn.textContent = 'start';
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+    } else {
         emojiDrops = generateEmojiDrops(emojiMode);
-    })
-    // canvas.addEventListener('mouseover', function(e) {
-    //     raf = window.requestAnimationFrame(draw);
-    // });
+        loopId = setInterval(draw, 50);
+        stopBtn.textContent = 'stop';
+    }
+});
+// canvas.addEventListener('mouseover', function(e) {
+//     raf = window.requestAnimationFrame(draw);
+// });
 
 // canvas.addEventListener('mouseout', function(e) {
 //     window.cancelAnimationFrame(raf);
